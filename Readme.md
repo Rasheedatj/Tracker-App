@@ -16,7 +16,7 @@ Here are the technologies and tools that were used to build this project:
 - **Frontend Language**: [Javascript](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/First_steps/What_is_JavaScript)
   ![Javascript](./src/assets/js_logo.png)
 
-- **Version contron & Deplyment**: [GitHub](https://github.com/)
+- **Version control & Deployment**: [GitHub](https://github.com/)
   ![GitHub](./src/assets/github_logo.png)
 
 - **Frontend Environment**: [Webpack](https://webpack.js.org/)
