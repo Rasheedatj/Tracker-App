@@ -41,7 +41,7 @@ I developed this app to help users stay fit by saving their calories consumed an
 1. Clone the project repository to your local machine.
 
    ```
-   git clone
+   git clone https://github.com/Rasheedatj/Tracker-App.git
    ```
 
 2. Install existing tailwind and webpack dependencies:
