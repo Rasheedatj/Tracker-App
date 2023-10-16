@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;400;600&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,600;1,100;1,400;1,500&family=Unica+One&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.home {
+  font-family: 'Inter', sans-serif;
+  /* font-family: 'Montserrat', sans-serif; */
+  /* font-family: 'Unica One', cursive; */
+}
+.active-body {
+  overflow: hidden;
+}
+.error.active {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.collapse-form.open {
+  display: block;
+}
+
+.modal.active {
+  display: block;
+}
+
+.card {
+  animation: slideUp 300ms ease-in-out;
+}
+
+input.active {
+  box-shadow: 0 0 1px 3px rgba(89, 159, 61, 0.5);
+}
+
+@keyframes slideUp {
+  0% {
+    transform: translateY(50px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}

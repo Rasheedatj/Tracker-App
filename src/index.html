@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <title>Tracalorie 2.0 | Track your Caloric Intake</title>
+  </head>
+  <body class="lg:h-[100vh] lg:overflow-hidden home">
+    <!-- HEADER -->
+    <header
+      class="flex items-center flex-row justify-between px-[2rem] py-[1rem] bg-primary"
+    >
+      <a
+        href="./index.html"
+        class="text-[32px] md:text-[40px] leading-[50px] text-white fonr-[700]"
+      >
+        <i class="fa-solid fa-utensils"></i> Tracalorie
+      </a>
+
+      <button
+        class="border-[1px] border-solid border-white rounded-[5px] text-white font-[400] text-[18px] py-[8px] px-[13px] hover:bg-white hover:text-primaryDark transition-all duration-100 ease-linear"
+        id=""
+      >
+        <!-- id=quote -->
+        Motivate
+      </button>
+    </header>
+
+    <!-- main -->
+    <main
+      class="flex flex-col-reverse items-center justify-center gap-[3rem] md:gap-[4rem] h-full px-[2rem] py-[3rem] md:px-[3rem] lg:px-0 lg:py-0 lg:flex-row"
+    >
+      <div class="lg:w-[40%] flex flex-col gap-[10px] md:gap-5">
+        <h1
+          class="font-[800] text-[28px] leading-[39.3px] md:text-[44.6px] md:leading-[54px]"
+        >
+          Embark on a journey towards better health with Tracalorie.
+        </h1>
+        <p
+          class="font-[400] text-[15.06px] md:text-[20.69px] leading-[25px] md:w-[90%] text-primaryDark"
+        >
+          Discover the power of mindful eating. Monitor your meals, understand
+          your habits, and achieve your wellness goals.
+        </p>
+        <a
+          href="./tracker.html"
+          class="text-center mt-[14px] bg-primary text-white font-[600] text-[17px] rounded-[5px] py-[10px] capitalize hover:bg-transparent border-[2px] border-solid border-transparent hover:border-primary hover:text-primary transition-all duration-300"
+          >start tracking</a
+        >
+      </div>
+      <div class="lg:w-[40%]">
+        <img id="hero-meal" alt="meal image" />
+      </div>
+    </main>
+
+    <!-- Motivation Modal -->
+    <section class="bg-modal fixed inset-0 pt-[2rem] hidden modal motivate">
+      <!-- modal box -->
+      <div
+        class="bg-white rounded-[10px] py-[10px] mx-auto w-[90%] md:w-[40%]"
+      ></div>
+    </section>
+  </body>
+</html>
