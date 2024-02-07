@@ -183,8 +183,6 @@ class App {
 //   document.querySelector('.motivate').classList.add('active');
 // }
 
-console.log(pathName);
-
 if (pathName === '/index.html' || pathName === '/') {
   const heroMeal = document.getElementById('hero-meal');
   heroMeal.src = mealImg;
