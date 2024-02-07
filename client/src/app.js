@@ -1,9 +1,9 @@
 import './css/input.css';
 import '../dist/output.css';
 import '@fortawesome/fontawesome-free/js/all';
-import Tracker from './Tracker';
-import { Meal, Workout } from './Item';
-import Storage from './Storage';
+import Tracker from './components/Tracker';
+import { Meal, Workout } from './components/Item';
+import Storage from './components/Storage';
 import mealImg from './assets/hero_meal.png';
 
 const pathName = window.location.pathname;
