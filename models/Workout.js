@@ -1,13 +1,13 @@
 const mongoose = require('mongoose');
 
-const MealSchema = new mongoose.Schema({
+const WorkoutSchema = new mongoose.Schema({
   name: {
     type: String,
     required: [true, 'Enter a meal'],
   },
   calorie: {
     type: Number,
-    required: [true, 'Enter calorie'],
+    required: [true, 'Enter workout calorie'],
   },
   date: {
     type: Date,
@@ -15,4 +15,4 @@ const MealSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model('Meal', MealSchema);
+module.exports = mongoose.model('Workout', WorkoutSchema);

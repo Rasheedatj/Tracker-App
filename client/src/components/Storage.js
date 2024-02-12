@@ -90,4 +90,5 @@ class Storage {
   }
 }
 
-export default Storage;
+
+export default Storage
