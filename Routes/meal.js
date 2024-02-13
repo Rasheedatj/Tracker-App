@@ -36,15 +36,15 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-// update idea
+// update meal
 router.put('/:id', async (req, res) => {
   try {
     const updatedMeal = await Meal.findByIdAndUpdate(
       req.params.id,
       {
         $set: {
-          meal: req.body.meal,
-          calories: req.body.calories,
+          name: req.body.name,
+          calorie: req.body.calorie,
         },
       },
       { new: true }
@@ -56,7 +56,7 @@ router.put('/:id', async (req, res) => {
   }
 });
 
-// delete idea
+// delete meal
 router.delete('/:id', async (req, res) => {
   try {
     await Meal.findByIdAndDelete(req.params.id);

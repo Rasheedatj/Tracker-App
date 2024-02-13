@@ -174,7 +174,9 @@
             </form>
           </section>
 
-          <section id="meal-items" class="flex flex-col gap-[10px]"></section>
+          <section id="meal-items" class="flex flex-col gap-[10px] relative">
+            <div class="custom-loader absolute left-1/2 right-1/2 top-1/2 hidden" id="meal-loader"></div>
+          </section>
         </div>
 
         <!-- Workout -->
@@ -228,8 +230,11 @@
 
           <section
             id="workout-items"
-            class="flex flex-col gap-[10px]"
-          ></section>
+            class="flex flex-col gap-[10px] relative"
+          >
+          <div class="custom-loader absolute left-1/2 right-1/2 top-1/2 hidden " id="workout-loader"></div>
+        
+        </section>
         </div>
       </section>
 

@@ -1,33 +1,52 @@
 import Storage from './Storage';
 import MealApi from '../services/MealApi';
+import WorkoutApi from '../services/WorkoutApi';
 
 class Tracker {
   constructor() {
     this._totalCalories = 0;
     this._calorieLimit = Storage.getCalorieLimit(2000);
     this._meals = [];
-    this._workouts = [
-      {
-        name: 'Running',
-        calorie: 300,
-        id: 1,
-      },
-    ];
+    this._workouts = [];
     this._render();
     document.querySelector('#enter-limit').value = this._calorieLimit;
     this.getMeals();
+    this.getWorkouts();
   }
 
   async getMeals() {
     try {
+      this.showSpinner('meal-loader');
       const res = await MealApi.getMeals();
       this._meals = res.data.data;
+      this.hideSpinner('meal-loader');
       this._render();
-      console.log(this._meals);
-      console.log(res);
+      this._displayNewItem();
     } catch (error) {
       console.log(error);
     }
+  }
+  async getWorkouts() {
+    try {
+      this.showSpinner('workout-loader');
+      const res = await WorkoutApi.getWorkouts();
+      this._workouts = res.data.data;
+      this.hideSpinner('workout-loader');
+      this._render();
+      this._displayNewWorkout();
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  hideSpinner(id) {
+    const spinner = document.getElementById(`${id}`);
+    spinner.classList.add('hidden');
+  }
+
+  showSpinner(id) {
+    const spinner = document.getElementById(`${id}`);
+    spinner.style.display = 'block';
   }
 
   addMeal(meal) {
@@ -60,7 +79,7 @@ class Tracker {
   }
 
   removeWorkout(id) {
-    const index = this._workouts.findIndex((workout) => workout.id === +id);
+    const index = this._workouts.findIndex((workout) => workout._id === id);
 
     if (index !== -1) {
       const workout = this._workouts[index];
@@ -175,7 +194,7 @@ class Tracker {
     document.getElementById(`workout-items`).innerHTML = this._workouts
       .map((workout) => {
         return `
-      <div class="border-[1px] border-grayBorder border-solid p-[1rem] rounded-[5px] flex justify-between items-center card" id="${workout.id}">
+      <div class="border-[1px] border-grayBorder border-solid p-[1rem] rounded-[5px] flex justify-between items-center card" id="${workout._id}">
         <h1 class="text-primaryDark font-[400] text-[18px] md:text-[24px] capitalize">${workout.name}</h1>
     
         <div
@@ -201,8 +220,6 @@ class Tracker {
     this._diaplayCaloriesBurned();
     this._calorieRemaining();
     this._diaplayCaloriesConsumed();
-    this._displayNewItem();
-    this._displayNewWorkout();
     this._progress();
   }
 }

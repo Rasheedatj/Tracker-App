@@ -7,6 +7,8 @@ import Main from './components/Main';
 
 const pathName = window.location.pathname;
 
+console.log(pathName);
+
 class App {
   constructor() {
     const tracker = new Tracker();

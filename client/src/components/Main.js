@@ -6,6 +6,7 @@ class Main {
   constructor() {
     this._tracker = new Tracker();
     this._loadEvents();
+    this.modal = document.querySelector('.modal');
   }
 
   _loadEvents() {
@@ -23,10 +24,13 @@ class Main {
 
     document
       .querySelector('.close-modal')
-      .addEventListener('click', function () {
-        document.querySelector('.modal').classList.remove('active');
-        document.querySelector('body').classList.remove('active-body');
-      });
+      .addEventListener('click', this._closeModal.bind(this));
+
+    window.addEventListener('click', (e) => {
+      if (e.target === this.modal) {
+        this._closeModal();
+      }
+    });
 
     document
       .getElementById('add-workout-btn')
@@ -95,6 +99,11 @@ class Main {
 
     document.querySelector('.modal').classList.add('active');
     document.querySelector('body').classList.add('active-body');
+  }
+
+  _closeModal() {
+    this.modal.classList.remove('active');
+    document.querySelector('body').classList.remove('active-body');
   }
 
   _formCollapse(type, e) {
