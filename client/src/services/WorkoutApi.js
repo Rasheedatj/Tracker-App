@@ -8,6 +8,10 @@ class WorkoutApi {
   getWorkouts() {
     return axios.get(this.URL);
   }
+
+  createWorkout(data) {
+    return axios.post(this.URL, data);
+  }
 }
 
 export default new WorkoutApi();

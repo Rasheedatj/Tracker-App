@@ -37,18 +37,28 @@
     </header>
 
     <!-- main -->
-    <main class="pt-[4rem] pb-[1rem] px-[2rem]">
+    <main class="pt-8 pb-[1rem] px-[2rem] ">
+      <header class="flex justify-between pb-6 ">
+        <div>
+          <h1 class="text-2xl text-primaryDark font-medium capitalize" id="username"></h1>
+          <p class="text-grayText">Hello, remember to stay healthy👋</p>
+        </div>
+
+        <div class="w-16 h-16 rounded-full grid place-items-center ">
+          <img id="user"   alt="user" >
+        </div>
+      </header>
       <!-- STATs -->
       <section class="grid grid-cols-1 md:grid-cols-6 gap-[1rem]">
         <div
-          class="bg-primaryDark flex flex-col gap-[.6rem] text-center text-white rounded-[5px] md:col-start-1 md:col-end-4 py-[2rem] hover:shadow-5xl cursor-pointer duration-300 ease-in-out transition-shadow"
+          class="bg-primaryDark flex flex-col gap-[.6rem] text-center text-white rounded-[5px] md:col-start-1 md:col-end-4 py-[2rem]  cursor-pointer "
         >
           <h1 class="font-[700] text-[32px] leading-[35px]" id="limit"></h1>
           <p class="capitalize font-[400] text-[18px]">Daily Calorie limit</p>
         </div>
 
         <div
-          class="bg-primary flex flex-col gap-[.6rem] text-center text-white rounded-[5px] md:col-start-4 md:col-end-7 py-[2rem] hover:shadow-5xl cursor-pointer duration-300 ease-in-out transition-shadow"
+          class="bg-primary flex flex-col gap-[.6rem] text-center text-white rounded-[5px] md:col-start-4 md:col-end-7 py-[2rem]  cursor-pointer "
         >
           <h1
             class="font-[700] text-[32px] leading-[35px]"
@@ -58,7 +68,7 @@
         </div>
 
         <div
-          class="bg-grayPrimary border-[1px] text-primaryDark border-solid rounded-[5px] border-grayBorder flex flex-col gap-[.6rem] text-center py-[2rem] md:col-start-1 md:col-end-3 hover:shadow-3xl cursor-pointer duration-300 ease-in-out transition-shadow"
+          class="bg-grayPrimary border-[1px] text-primaryDark border-solid rounded-[5px] border-grayBorder flex flex-col gap-[.6rem] text-center py-[2rem] md:col-start-1 md:col-end-3  cursor-pointer "
         >
           <h1
             class="font-[700] text-[32px] leading-[35px]"
@@ -68,14 +78,14 @@
         </div>
 
         <div
-          class="bg-grayPrimary border-[1px] text-primaryDark border-solid rounded-[5px] border-grayBorder flex flex-col gap-[.6rem] text-center py-[2rem] md:col-start-3 md:col-end-5 hover:shadow-3xl cursor-pointer duration-300 ease-in-out transition-shadow"
+          class="bg-grayPrimary border-[1px] text-primaryDark border-solid rounded-[5px] border-grayBorder flex flex-col gap-[.6rem] text-center py-[2rem] md:col-start-3 md:col-end-5  cursor-pointer "
         >
           <h1 class="font-[700] text-[32px] leading-[35px]" id="burnedCal"></h1>
           <p class="capitalize font-[400] text-[18px]">Calories burned</p>
         </div>
 
         <div
-          class="bg-grayPrimary border-[1px] text-primaryDark border-solid rounded-[5px] border-grayBorder flex flex-col gap-[.6rem] text-center py-[2rem] md:col-start-5 md:col-end-7 hover:shadow-3xl cursor-pointer duration-300 ease-in-out transition-shadow"
+          class="bg-grayPrimary border-[1px] text-primaryDark border-solid rounded-[5px] border-grayBorder flex flex-col gap-[.6rem] text-center py-[2rem] md:col-start-5 md:col-end-7  cursor-pointer "
           id="remaining-box"
         >
           <h1
@@ -90,7 +100,7 @@
       <section class="my-[3rem]">
         <div class="bg-progress h-[1rem] w-full rounded-[20px] overflow-x-clip">
           <div
-            class="h-full w-0 bg-primary transition-all duration-700 ease-linear"
+            class="h-full w-0 bg-primary transition-all duration-700 ease-linear "
             id="progress-bar"
           ></div>
         </div>
@@ -242,17 +252,26 @@
     </main>
 
     <!-- error message -->
+    <section class="bg-modal fixed inset-0 pt-8 hidden" id="delete-modal">
     <div
-      class="fixed text-white right-[5%] top-[5%] p-[1rem] rounded-[5px] bg-primary translate-x-[140%] transition-transform duration-700 ease-linear opacity-100 flex items-center gap-[10px] border-l-[5px] border-solid border-orange error"
+      class=" mx-auto w-9/12  bg-white p-8 rounded-2xl flex flex-col gap-6 "
     >
-      <i class="fa fa-exclamation-triangle"></i>
-      <p>Please, comepletely fill out the form</p>
+      <h1 class="text-3xl">Delete Item: <span id="delete-item" class="capitalize">pounded yam</span></h1>
+      <div class="border-y-2 border-gray-200 py-3">
+        <p class="text-lg">Are you sure you want to delete item: <span id="delete-item" >pounded yam</span>?</p>
+      </div>
+
+      <div class="self-end flex items-center gap-1 ">
+        <button type="submit" class="bg-slate-400 rounded-lg outline-none text-white border-white border-2 px-3 py-2 " id="cancel-action">Cancel</button>
+        <button type="submit" class="bg-red-600 rounded-lg outline-none text-white border-white border-2 px-3 py-2 " id="delete-action">Delete</button>
+      </div>
     </div>
+  </section>
 
     <!-- set Daily Limit Modal -->
     <section class="bg-modal fixed inset-0 pt-[2rem] modal hidden">
       <!-- modal box -->
-      <div class="bg-white rounded-[10px] py-[10px] mx-auto w-[90%] md:w-[40%]">
+      <div class="bg-white rounded-xl py-3 mx-auto w-[90%] md:w-[40%]">
         <header
           class="flex justify-between items-center p-[10px] border-b-[1px] border-solid border-grayBorder"
         >

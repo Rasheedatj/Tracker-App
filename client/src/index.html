@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
-    <title>Tracalorie 2.0 | Track your Caloric Intake</title>
+    <title>Tracalorie </title>
   </head>
   <body class="lg:h-[100vh] lg:overflow-hidden home">
     <!-- HEADER -->
@@ -23,10 +23,9 @@
 
       <button
         class="border-[1px] border-solid border-white rounded-[5px] text-white font-[400] text-[18px] py-[8px] px-[13px] hover:bg-white hover:text-primaryDark transition-all duration-100 ease-linear"
-        id=""
+        id="sign-up"
       >
-        <!-- id=quote -->
-        Motivate
+        Sign Up
       </button>
     </header>
 
@@ -49,6 +48,7 @@
         <a
           href="./tracker.html"
           class="text-center mt-[14px] bg-primary text-white font-[600] text-[17px] rounded-[5px] py-[10px] capitalize hover:bg-transparent border-[2px] border-solid border-transparent hover:border-primary hover:text-primary transition-all duration-300"
+          id="track"
           >start tracking</a
         >
       </div>
@@ -57,13 +57,42 @@
       </div>
     </main>
 
-    <!-- Motivation Modal -->
-    <section class="bg-modal fixed inset-0 pt-[2rem] hidden modal motivate">
-      <!-- modal box -->
-      <div
-        class="bg-white rounded-[10px] py-[10px] mx-auto w-[90%] md:w-[40%]"
-      >
-    </div>
-    </section>
+  
+
+      <!-- set username -->
+      <section class="bg-modal fixed inset-0 pt-[2rem]  hidden " id="username-modal">
+        <!-- modal box -->
+        <div class="bg-white rounded-[10px] py-[10px] mx-auto w-[90%] md:w-[40%]">
+          <header
+            class="flex justify-between items-center p-[10px] border-b-[1px] border-solid border-grayBorder"
+          >
+            <h1 class="capitalize text-[20px] font-[400]">set username</h1>
+  
+            <div class="close-username">
+              <i
+                class="fa fa-times text-grayBorder text-[24px] font-light cursor-pointer" id="close-name"
+              ></i>
+            </div>
+          </header>
+  
+          <form class="p-[10px] set-username">
+            <label for="calorie limit">Enter your username</label>
+            <input
+              type="text"
+              id="enter-username"
+              name="username"
+              class="outline-none mt-[.5rem] border-[1px] border-solid border-grayBorder rounded-[5px] bg-transparent p-[10px] text-primaryDark font-[400] w-full"
+              placeholder="Jane Doe"
+            />
+            <button
+              class="text-white self-start px-[10px] py-[6px] gap-[5px] bg-primary rounded-[5px] capitalize font-[600] mt-[1rem] "
+              type="submit"
+              id="save-username"
+            >
+              Save
+            </button>
+          </form>
+        </div>
+      </section>
   </body>
 </html>

@@ -7,7 +7,6 @@ class Meal {
   constructor(name, calorie) {
     this.name = name;
     this.calorie = calorie;
-    this.id = meals.length + 1;
   }
 }
 
@@ -15,7 +14,6 @@ class Workout {
   constructor(name, calorie) {
     this.name = name;
     this.calorie = calorie;
-    this.id = workouts.length + 1;
   }
 }
 

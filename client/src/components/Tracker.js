@@ -4,6 +4,7 @@ import WorkoutApi from '../services/WorkoutApi';
 
 class Tracker {
   constructor() {
+    this.displayUsername();
     this._totalCalories = 0;
     this._calorieLimit = Storage.getCalorieLimit(2000);
     this._meals = [];
@@ -39,9 +40,14 @@ class Tracker {
     }
   }
 
+  displayUsername() {
+    const username = localStorage.getItem('username');
+    document.getElementById('username').innerText = username;
+  }
+
   hideSpinner(id) {
     const spinner = document.getElementById(`${id}`);
-    spinner.classList.add('hidden');
+    spinner.style.display = 'none';
   }
 
   showSpinner(id) {
@@ -49,21 +55,17 @@ class Tracker {
     spinner.style.display = 'block';
   }
 
-  addMeal(meal) {
-    this._meals.push(meal);
-    this._totalCalories += meal.calorie;
-    Storage.setTotalCalorie(this._totalCalories);
-    Storage.saveMeal(meal);
-    this._displayNewItem(meal);
+  addMealToList(item) {
+    this._totalCalories += item.calorie;
+    this._meals.push(item);
+    this._displayNewItem(item);
     this._render();
   }
 
-  addWorkout(workout) {
-    this._workouts.push(workout);
-    this._totalCalories -= workout.calorie;
-    this._displayNewWorkout(workout);
-    Storage.setTotalCalorie(this._totalCalories);
-    Storage.saveWorkout(workout);
+  addWorkoutToList(item) {
+    this._totalCalories -= item.calorie;
+    this._workouts.push(item);
+    this._displayNewWorkout(item);
     this._render();
   }
 
@@ -99,7 +101,7 @@ class Tracker {
     this._meals = [];
     this._workouts = [];
     document.getElementById('progress-bar').style.width = '0%';
-    Storage.clearAll();
+
     this._render();
   }
 
@@ -147,7 +149,7 @@ class Tracker {
 
   _progress() {
     const progressBar = document.getElementById('progress-bar');
-    const percentage = (this._totalCalories / this._calorieLimit) * 100;
+    const percentage = (this._calcTotalCalories() / this._calorieLimit) * 100;
     const width = Math.min(percentage, 100);
     progressBar.style.width = `${width}%`;
 
@@ -182,7 +184,7 @@ class Tracker {
           <div
             class="cursor-pointer grid place-items-center w-[1.5rem] h-[1.5rem] bg-danger rounded-[5px] text-white delete"
           >
-            <i class="fa fa-times"></i>
+            <i class="fa fa-times delete"></i>
           </div>
           </div>
        `;
@@ -206,7 +208,7 @@ class Tracker {
         <div
           class="cursor-pointer grid place-items-center w-[1.5rem] h-[1.5rem] bg-danger rounded-[5px] text-white delete"
         >
-          <i class="fa fa-times"></i>
+          <i class="fa fa-times delete"></i>
         </div>
         </div>
      `;

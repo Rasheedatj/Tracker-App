@@ -9,6 +9,7 @@ module.exports = {
         white: '#ffffff',
         grayPrimary: '#f8f9fa',
         grayBorder: '#0000002d',
+        grayText: '#718096',
         danger: '#dc3545',
         orange: '#fd7e14',
         progress: '#e9ecef',

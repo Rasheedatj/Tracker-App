@@ -1,12 +1,15 @@
 import Tracker from './Tracker';
 import Storage from './Storage';
 import { Meal, Workout } from './Item';
+import MealApi from '../services/MealApi';
+import WorkoutApi from '../services/WorkoutApi';
 
 class Main {
   constructor() {
     this._tracker = new Tracker();
     this._loadEvents();
     this.modal = document.querySelector('.modal');
+    this.delete_modal = document.getElementById('delete-modal');
   }
 
   _loadEvents() {
@@ -31,7 +34,6 @@ class Main {
         this._closeModal();
       }
     });
-
     document
       .getElementById('add-workout-btn')
       .addEventListener('click', this._formCollapse.bind(this, 'workout'));
@@ -63,32 +65,37 @@ class Main {
       .getElementById('reset')
       .addEventListener('click', this.reset.bind(this));
 
+    document
+      .getElementById('cancel-action')
+      .addEventListener('click', this._closeAction.bind(this));
+
     window.addEventListener('click', this.activeInput.bind(this));
+    window.addEventListener('click', (e) => {
+      e.target === this.delete_modal ? this._closeAction() : '';
+    });
   }
 
-  _newItem(type, e) {
+  async _newItem(type, e) {
     e.preventDefault();
 
     const name = document.getElementById(`enter-${type}`);
     const calorie = document.getElementById(`enter-${type}-calories`);
     // validate input
-    if (name.value.length < 1 || calorie.value.length < 1) {
-      document.querySelector('.error').classList.add('active');
-
-      setTimeout(function () {
-        document.querySelector('.error').classList.remove('active');
-      }, 3000);
-
+    if (!name.value || !calorie.value) {
+      alert('Kindly fill all fields');
       return;
     }
 
     if (type === 'meal') {
       const meal = new Meal(name.value, +calorie.value);
-      this._tracker.addMeal(meal);
+      const newMeal = await MealApi.createMeal(meal);
+      this._tracker.addMealToList(newMeal.data.data);
     } else {
       const workout = new Workout(name.value, +calorie.value);
-      this._tracker.addWorkout(workout);
+      const newWorkout = await WorkoutApi.createWorkout(workout);
+      this._tracker.addWorkoutToList(newWorkout.data.data);
     }
+
     name.value = '';
     calorie.value = '';
     document.getElementById(`${type}-collapse`).classList.remove('open');
@@ -120,17 +127,32 @@ class Main {
     Storage.setCalorieLimit(+limitInput.value);
   }
 
+  _closeAction() {
+    this.delete_modal.classList.add('hidden');
+  }
+
+  _openAction() {
+    this.delete_modal.classList.remove('hidden');
+  }
+
   removeItem(type, e) {
-    if (e.target.parentElement.classList.contains('delete')) {
-      if (window.confirm('Do you want to remove this item?')) {
+    if (e.target.classList.contains('delete')) {
+      const item = e.target.closest('.card').querySelector('h1').innerText;
+      document
+        .querySelectorAll('#delete-item')
+        .forEach((el) => (el.innerText = item));
+
+      this._openAction();
+      document.getElementById('delete-action').addEventListener('click', () => {
         const id = e.target.closest('.card').getAttribute('id');
 
         type === 'meal'
           ? this._tracker.removeMeal(id)
           : this._tracker.removeWorkout(id);
         e.target.closest('.card').remove();
-      }
-      return;
+        this._closeAction();
+        return;
+      });
     }
   }
 

@@ -8,6 +8,10 @@ class MealApi {
   getMeals() {
     return axios.get(this.URL);
   }
+
+  createMeal(data) {
+    return axios.post(this.URL, data);
+  }
 }
 
 export default new MealApi();
