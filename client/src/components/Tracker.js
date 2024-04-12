@@ -17,10 +17,10 @@ class Tracker {
 
   async getMeals() {
     try {
-      this.showSpinner('meal-loader');
+      // this.showSpinner('meal-loader');
       const res = await MealApi.getMeals();
       this._meals = res.data.data;
-      this.hideSpinner('meal-loader');
+      // this.hideSpinner('meal-loader');
       this._render();
       this._displayNewItem();
     } catch (error) {
@@ -185,7 +185,7 @@ class Tracker {
           <div class="relative">
               <i class="peer fa fa-ellipsis-v" aria-hidden="true"></i>
 
-              <span class="peer absolute top-0 bg-white z-10 ">
+              <span class="peer absolute top-0 bg-white z-10 hidden ">
                 <p  class="px-4 py-2 cursor-pointer hover:bg-gray-200 delete" id="delete">Delete</p>
                 <p  class="px-4 py-2 cursor-pointer hover:bg-gray-200 update" id="update">Update</p>
               </span>

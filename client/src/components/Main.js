@@ -8,14 +8,25 @@ class Main {
   constructor() {
     this._tracker = new Tracker();
     this._loadEvents();
+    this.form = document.getElementById('meal-collapse');
     this.modal = document.querySelector('.modal');
     this.delete_modal = document.getElementById('delete-modal');
+    this.id;
   }
 
   _loadEvents() {
-    document
-      .getElementById('meal-form')
-      .addEventListener('submit', this._newItem.bind(this, 'meal'));
+    document.getElementById('meal-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (this.form.classList.contains('updateable')) {
+        this.updateMeal(this.id);
+      } else {
+        this._newItem('meal');
+      }
+    });
+
+    // document
+    //   .getElementById('meal-form')
+    //   .addEventListener('submit', this._newItem.bind(this, 'meal'));
 
     document
       .getElementById('workout-form')
@@ -46,16 +57,6 @@ class Main {
       .querySelector('.save')
       .addEventListener('click', this._setLimit.bind(this));
 
-    document.getElementById('meal-items').addEventListener('click', (e) => {
-      if (e.target.classList.contains('delete')) {
-        this.removeItem('meal', e);
-      }
-    });
-
-    document
-      .getElementById('workout-items')
-      .addEventListener('click', this.removeItem.bind(this, 'workout'));
-
     document
       .getElementById('filter-meal')
       .addEventListener('input', this.filterItem.bind(this, 'meal'));
@@ -72,36 +73,31 @@ class Main {
       .getElementById('cancel-action')
       .addEventListener('click', this._closeAction.bind(this));
 
+    document.getElementById('meal-items').addEventListener('click', (e) => {
+      const id = e.target.closest('.card').getAttribute('id');
+      if (e.target.classList.contains('delete')) {
+        e.stopImmediatePropagation();
+        this.removeItem('meal', e, id);
+      } else if (e.target.classList.contains('update')) {
+        e.stopImmediatePropagation();
+        this._formCollapse('meal', e);
+        this.form.classList.add('updateable');
+        this.id = id;
+      }
+    });
+
+    document.getElementById('workout-items').addEventListener('click', (e) => {
+      const id = e.target.closest('.card').getAttribute('id');
+      if (e.target.classList.contains('delete')) {
+        e.stopImmediatePropagation();
+        this.removeItem('workout', e, id);
+      }
+    });
+
     window.addEventListener('click', this.activeInput.bind(this));
     window.addEventListener('click', (e) => {
       e.target === this.delete_modal ? this._closeAction() : '';
     });
-  }
-
-  async _newItem(type, e) {
-    e.preventDefault();
-
-    const name = document.getElementById(`enter-${type}`);
-    const calorie = document.getElementById(`enter-${type}-calories`);
-    // validate input
-    if (!name.value || !calorie.value) {
-      alert('Kindly fill all fields');
-      return;
-    }
-
-    if (type === 'meal') {
-      const meal = new Meal(name.value, +calorie.value);
-      const newMeal = await MealApi.createMeal(meal);
-      this._tracker.addMealToList(newMeal.data.data);
-    } else {
-      const workout = new Workout(name.value, +calorie.value);
-      const newWorkout = await WorkoutApi.createWorkout(workout);
-      this._tracker.addWorkoutToList(newWorkout.data.data);
-    }
-
-    name.value = '';
-    calorie.value = '';
-    document.getElementById(`${type}-collapse`).classList.remove('open');
   }
 
   _openModal(e) {
@@ -138,7 +134,7 @@ class Main {
     this.delete_modal.classList.remove('hidden');
   }
 
-  removeItem(type, e) {
+  removeItem(type, e, id) {
     const item = e.target.closest('.card').querySelector('h1').innerText;
     document
       .querySelectorAll('#delete-item')
@@ -146,7 +142,6 @@ class Main {
 
     this._openAction();
     document.getElementById('delete-action').addEventListener('click', () => {
-      const id = e.target.closest('.card').getAttribute('id');
       console.log(id);
 
       type === 'meal' ? this.deleteMeal(id) : this.deleteWorkout(id);
@@ -155,6 +150,31 @@ class Main {
       this._closeAction();
       return;
     });
+  }
+
+  async _newItem(type) {
+    // e.preventDefault();
+    const name = document.getElementById(`enter-${type}`);
+    const calorie = document.getElementById(`enter-${type}-calories`);
+    // validate input
+    if (!name.value || !calorie.value) {
+      alert('Kindly fill all fields');
+      return;
+    }
+
+    if (type === 'meal') {
+      const meal = new Meal(name.value, +calorie.value);
+      const newMeal = await MealApi.createMeal(meal);
+      this._tracker.addMealToList(newMeal.data.data);
+    } else {
+      const workout = new Workout(name.value, +calorie.value);
+      const newWorkout = await WorkoutApi.createWorkout(workout);
+      this._tracker.addWorkoutToList(newWorkout.data.data);
+    }
+
+    name.value = '';
+    calorie.value = '';
+    document.getElementById(`${type}-collapse`).classList.remove('open');
   }
 
   async deleteMeal(id) {
@@ -166,13 +186,39 @@ class Main {
     }
   }
 
+  async updateMeal(id, e) {
+    try {
+      let form = document.getElementById('meal-form');
+      const formdata = new FormData(form);
+      const data = {
+        name: formdata.get('meal'),
+        calorie: formdata.get('calorie'),
+      };
+      await MealApi.updateMeal(id, data);
+      this._tracker.getMeals();
+      this.closeUpdateForm(formdata, 'meal', form);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   async deleteWorkout(id) {
     try {
-      await WorkoutApi.deleteMeal(id);
+      await WorkoutApi.deleteWorkout(id);
       this._tracker.removeWorkout(id);
     } catch (error) {
       console.log(error);
     }
+  }
+
+  closeUpdateForm(formdata, type, form) {
+    formdata.forEach((value, key) => {
+      const input = form.querySelector(`[name="${key}"]`);
+      if (input) {
+        input.value = '';
+      }
+    });
+    document.getElementById(`${type}-collapse`).classList.remove('open');
   }
 
   filterItem(type, e) {

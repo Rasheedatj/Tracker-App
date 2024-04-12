@@ -16,6 +16,10 @@ class MealApi {
   deleteMeal(id) {
     return axios.delete(`${this.URL}/${id}`);
   }
+
+  updateMeal(id, data) {
+    return axios.put(`${this.URL}/${id}`, data);
+  }
 }
 
 export default new MealApi();
