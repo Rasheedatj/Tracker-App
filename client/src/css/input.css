@@ -51,7 +51,12 @@
 }
 
 input.active {
-  box-shadow: 0 0 1px 3px rgba(89, 159, 61, 0.5);
+  box-shadow: 0 0 1px 3px #4267a6;
+  border: none;
+}
+
+#progress-bar {
+  border-radius: inherit;
 }
 
 @keyframes slideUp {

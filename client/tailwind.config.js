@@ -4,15 +4,15 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: '#599f3d',
-        primaryDark: '#212529',
-        white: '#ffffff',
+        primary: '#e7f8ef',
+        secondary: '#232020',
+        // white: 'white',
         grayPrimary: '#f8f9fa',
         grayBorder: '#0000002d',
         grayText: '#718096',
         danger: '#dc3545',
-        orange: '#fd7e14',
-        progress: '#e9ecef',
+        orange: '#e25032',
+        accent1: '#4267a6',
         modal: '#0000002d',
         close: '#dee2e6',
       },

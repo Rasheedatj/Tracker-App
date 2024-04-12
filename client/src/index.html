@@ -9,20 +9,20 @@
 
     <title>Tracalorie </title>
   </head>
-  <body class="lg:h-[100vh] lg:overflow-hidden home">
+  <body class="lg:h-[100vh] lg:overflow-hidden home bg-primary">
     <!-- HEADER -->
     <header
-      class="flex items-center flex-row justify-between px-[2rem] py-[1rem] bg-primary"
+      class="flex items-center flex-row justify-between px-[2rem] py-[1rem]"
     >
       <a
         href="./index.html"
-        class="text-[32px] md:text-[40px] leading-[50px] text-white fonr-[700]"
+        class="text-[32px] md:text-4xl leading-[50px] text-secondary font-[700]"
       >
         <i class="fa-solid fa-utensils"></i> Tracalorie
       </a>
 
       <button
-        class="border-[1px] border-solid border-white rounded-[5px] text-white font-[400] text-[18px] py-[8px] px-[13px] hover:bg-white hover:text-primaryDark transition-all duration-100 ease-linear"
+        class="border-[1px] border-solid border-secondary text-secondary   rounded-md  font-semibold text-lg py-2 px-3   transition-all duration-100 ease-linear"
         id="sign-up"
       >
         Sign Up
@@ -35,19 +35,19 @@
     >
       <div class="lg:w-[40%] flex flex-col gap-[10px] md:gap-5">
         <h1
-          class="font-[800] text-[28px] leading-[39.3px] md:text-[44.6px] md:leading-[54px]"
+          class="font-bold text-3xl leading-10 md:text-5xl md:leading-tight text-secondary"
         >
           Embark on a journey towards better health with Tracalorie.
         </h1>
         <p
-          class="font-[400] text-[15.06px] md:text-[20.69px] leading-[25px] md:w-[90%] text-primaryDark"
+          class="font-normal text-sm md:text-lg leading-5 md:w-[90%] text-secondary"
         >
           Discover the power of mindful eating. Monitor your meals, understand
           your habits, and achieve your wellness goals.
         </p>
         <a
           href="./tracker.html"
-          class="text-center mt-[14px] bg-primary text-white font-[600] text-[17px] rounded-[5px] py-[10px] capitalize hover:bg-transparent border-[2px] border-solid border-transparent hover:border-primary hover:text-primary transition-all duration-300"
+          class="text-center mt-[14px] bg-secondary text-primary hover:border-secondary hover:text-secondary font-[600] text-[17px] rounded-[5px] py-[10px] capitalize hover:bg-transparent border-[2px] border-solid border-transparent  transition-all duration-300"
           id="track"
           >start tracking</a
         >
@@ -56,8 +56,6 @@
         <img id="hero-meal" alt="meal image" />
       </div>
     </main>
-
-  
 
       <!-- set username -->
       <section class="bg-modal fixed inset-0 pt-[2rem]  hidden " id="username-modal">
@@ -81,11 +79,12 @@
               type="text"
               id="enter-username"
               name="username"
-              class="outline-none mt-[.5rem] border-[1px] border-solid border-grayBorder rounded-[5px] bg-transparent p-[10px] text-primaryDark font-[400] w-full"
+              class="peer outline-none mt-[.5rem] border-[1px] border-solid border-grayBorder rounded-[5px] bg-transparent p-[10px] text-secondary font-[400] w-full"
               placeholder="Jane Doe"
             />
+            <p class="peer text-red-500 text-sm italic font-normal hidden peer-invalid:block">Enter a username</p>
             <button
-              class="text-white self-start px-[10px] py-[6px] gap-[5px] bg-primary rounded-[5px] capitalize font-[600] mt-[1rem] "
+              class="text-primary self-start px-[10px] py-[6px] gap-[5px] bg-secondary rounded-[5px] capitalize font-[600] mt-[1rem] "
               type="submit"
               id="save-username"
             >

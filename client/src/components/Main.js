@@ -46,9 +46,12 @@ class Main {
       .querySelector('.save')
       .addEventListener('click', this._setLimit.bind(this));
 
-    document
-      .getElementById('meal-items')
-      .addEventListener('click', this.removeItem.bind(this, 'meal'));
+    document.getElementById('meal-items').addEventListener('click', (e) => {
+      if (e.target.classList.contains('delete')) {
+        this.removeItem('meal', e);
+      }
+    });
+
     document
       .getElementById('workout-items')
       .addEventListener('click', this.removeItem.bind(this, 'workout'));
@@ -136,23 +139,39 @@ class Main {
   }
 
   removeItem(type, e) {
-    if (e.target.classList.contains('delete')) {
-      const item = e.target.closest('.card').querySelector('h1').innerText;
-      document
-        .querySelectorAll('#delete-item')
-        .forEach((el) => (el.innerText = item));
+    const item = e.target.closest('.card').querySelector('h1').innerText;
+    document
+      .querySelectorAll('#delete-item')
+      .forEach((el) => (el.innerText = item));
 
-      this._openAction();
-      document.getElementById('delete-action').addEventListener('click', () => {
-        const id = e.target.closest('.card').getAttribute('id');
+    this._openAction();
+    document.getElementById('delete-action').addEventListener('click', () => {
+      const id = e.target.closest('.card').getAttribute('id');
+      console.log(id);
 
-        type === 'meal'
-          ? this._tracker.removeMeal(id)
-          : this._tracker.removeWorkout(id);
-        e.target.closest('.card').remove();
-        this._closeAction();
-        return;
-      });
+      type === 'meal' ? this.deleteMeal(id) : this.deleteWorkout(id);
+
+      e.target.closest('.card').remove();
+      this._closeAction();
+      return;
+    });
+  }
+
+  async deleteMeal(id) {
+    try {
+      await MealApi.deleteMeal(id);
+      this._tracker.removeMeal(id);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async deleteWorkout(id) {
+    try {
+      await WorkoutApi.deleteMeal(id);
+      this._tracker.removeWorkout(id);
+    } catch (error) {
+      console.log(error);
     }
   }
 

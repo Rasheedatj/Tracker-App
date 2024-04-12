@@ -12,6 +12,10 @@ class WorkoutApi {
   createWorkout(data) {
     return axios.post(this.URL, data);
   }
+
+  deleteWorkout(id) {
+    return axios.delete(`${this.URL}/${id}`);
+  }
 }
 
 export default new WorkoutApi();

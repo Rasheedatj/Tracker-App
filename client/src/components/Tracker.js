@@ -27,6 +27,7 @@ class Tracker {
       console.log(error);
     }
   }
+
   async getWorkouts() {
     try {
       this.showSpinner('workout-loader');
@@ -173,19 +174,22 @@ class Tracker {
       .map((meal) => {
         return `
         <div class="border-[1px] border-grayBorder border-solid p-[1rem] rounded-[5px] flex justify-between items-center card" id="${meal._id}">
-          <h1 class="text-primaryDark font-[400] text-[18px] md:text-[24px] capitalize">${meal.name}</h1>
+          <h1 class="text-secondary font-[400] text-[18px] md:text-[24px] capitalize">${meal.name}</h1>
 
           <div
-            class="bg-primary  text-white font-[500] text-[18px] md:text-[24px] rounded-[5px] py-[5px] px-[1rem]"
+            class="bg-accent1  text-white font-[500] text-[18px] md:text-[24px] rounded-[5px] py-[5px] px-[1rem]"
           >
           <p >${meal.calorie}</p>
 
           </div>
-          <div
-            class="cursor-pointer grid place-items-center w-[1.5rem] h-[1.5rem] bg-danger rounded-[5px] text-white delete"
-          >
-            <i class="fa fa-times delete"></i>
-          </div>
+          <div class="relative">
+              <i class="peer fa fa-ellipsis-v" aria-hidden="true"></i>
+
+              <span class="peer absolute top-0 bg-white z-10 ">
+                <p  class="px-4 py-2 cursor-pointer hover:bg-gray-200 delete" id="delete">Delete</p>
+                <p  class="px-4 py-2 cursor-pointer hover:bg-gray-200 update" id="update">Update</p>
+              </span>
+              </div>
           </div>
        `;
       })
@@ -197,7 +201,7 @@ class Tracker {
       .map((workout) => {
         return `
       <div class="border-[1px] border-grayBorder border-solid p-[1rem] rounded-[5px] flex justify-between items-center card" id="${workout._id}">
-        <h1 class="text-primaryDark font-[400] text-[18px] md:text-[24px] capitalize">${workout.name}</h1>
+        <h1 class="text-secondary font-[400] text-[18px] md:text-[24px] capitalize">${workout.name}</h1>
     
         <div
           class="bg-orange  text-white font-[500] text-[18px] md:text-[24px] rounded-[5px] py-[5px] px-[1rem]"
@@ -205,11 +209,17 @@ class Tracker {
         <p >${workout.calorie}</p>
   
         </div>
-        <div
-          class="cursor-pointer grid place-items-center w-[1.5rem] h-[1.5rem] bg-danger rounded-[5px] text-white delete"
-        >
-          <i class="fa fa-times delete"></i>
+        <div class="relative">
+        <i class="peer fa fa-ellipsis-v" aria-hidden="true"></i>
+
+        <span class="peer absolute top-0 bg-white z-10 hidden">
+          <p  class="px-4 py-2 cursor-pointer hover:bg-gray-200 delete" id="delete">Delete</p>
+          <p  class="px-4 py-2 cursor-pointer hover:bg-gray-200 update" id="update">Update</p>
+        </span>
         </div>
+
+  
+    </div>
         </div>
      `;
       })
