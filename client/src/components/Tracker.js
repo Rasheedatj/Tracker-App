@@ -70,28 +70,6 @@ class Tracker {
     this._render();
   }
 
-  removeMeal(id) {
-    const index = this._meals.findIndex((meal) => meal._id === id);
-
-    if (index !== -1) {
-      const meal = this._meals[index];
-      this._totalCalories -= meal.calorie;
-      this._meals.splice(index, 1);
-      this._render();
-    }
-  }
-
-  removeWorkout(id) {
-    const index = this._workouts.findIndex((workout) => workout._id === id);
-
-    if (index !== -1) {
-      const workout = this._workouts[index];
-      this._totalCalories += workout.calorie;
-      this._workouts.splice(index, 1);
-      this._render();
-    }
-  }
-
   setLimit(calories) {
     this._calorieLimit = calories;
     this._render();
@@ -182,10 +160,10 @@ class Tracker {
           <p >${meal.calorie}</p>
 
           </div>
-          <div class="relative">
-              <i class="peer fa fa-ellipsis-v" aria-hidden="true"></i>
+          <div class="relative ">
+              <i class="w-4 h-4 option-btn fa fa-ellipsis-v" aria-hidden="true"></i>
 
-              <span class="peer absolute top-0 bg-white z-10 hidden ">
+              <span class="options absolute top-0 bg-white z-10 hidden ">
                 <p  class="px-4 py-2 cursor-pointer hover:bg-gray-200 delete" id="delete">Delete</p>
                 <p  class="px-4 py-2 cursor-pointer hover:bg-gray-200 update" id="update">Update</p>
               </span>
@@ -209,10 +187,10 @@ class Tracker {
         <p >${workout.calorie}</p>
   
         </div>
-        <div class="relative">
-        <i class="peer fa fa-ellipsis-v" aria-hidden="true"></i>
+        <div class="relative ">
+        <i class="w-4 h-4 option-btn fa fa-ellipsis-v" aria-hidden="true"></i>
 
-        <span class="peer absolute top-0 bg-white z-10 hidden">
+        <span class="options absolute top-0 bg-white z-10 hidden ">
           <p  class="px-4 py-2 cursor-pointer hover:bg-gray-200 delete" id="delete">Delete</p>
           <p  class="px-4 py-2 cursor-pointer hover:bg-gray-200 update" id="update">Update</p>
         </span>

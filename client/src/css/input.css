@@ -50,11 +50,6 @@
   }
 }
 
-input.active {
-  box-shadow: 0 0 1px 3px #4267a6;
-  border: none;
-}
-
 #progress-bar {
   border-radius: inherit;
 }

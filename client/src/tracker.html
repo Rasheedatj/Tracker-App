@@ -112,7 +112,7 @@
           <input
             type="text"
             id="filter-meal"
-            class="outline-none border-[1px] border-solid border-grayBorder rounded-[5px] bg-transparent p-[10px] text-secondary font-[400] w-full"
+            class="outline-none border-[1px] border-solid border-grayBorder rounded-[5px] bg-transparent p-[10px] text-secondary font-[400] w-full focus:ring-2 focus:ring-secondary focus:ring-offset-1 focus:border-"
             placeholder="Filter Meals..."
           />
         </div>
@@ -121,7 +121,7 @@
           <input
             type="text"
             id="filter-workout"
-            class="outline-none border-[1px] border-solid border-grayBorder rounded-[5px] bg-transparent p-[10px] text-secondary font-[400] w-full"
+            class="outline-none border-[1px] border-solid border-grayBorder rounded-[5px] bg-transparent p-[10px] text-secondary font-[400] w-full focus:ring-2 focus:ring-secondary focus:ring-offset-1 focus:border-"
             placeholder="Filter Workouts..."
           />
         </div>
@@ -165,7 +165,7 @@
                 type="text"
                 id="enter-meal"
                 name="meal"
-                class="outline-none border-[1px] border-solid border-grayBorder rounded-[5px] bg-transparent p-[10px] text-secondary font-[400] w-full"
+                class="outline-none border-[1px] border-solid border-grayBorder rounded-[5px] bg-transparent p-[10px] text-secondary font-[400] w-full focus:ring-2 focus:ring-secondary focus:ring-offset-1 focus:border-"
                 placeholder="Enter Meal or Items"
               />
 
@@ -173,7 +173,7 @@
                 type="number"
                 name="calorie"
                 id="enter-meal-calories"
-                class="outline-none border-[1px] border-solid border-grayBorder rounded-[5px] bg-transparent p-[10px] text-secondary font-[400] w-full"
+                class="outline-none border-[1px] border-solid border-grayBorder rounded-[5px] bg-transparent p-[10px] text-secondary font-[400] w-full focus:ring-2 focus:ring-secondary focus:ring-offset-1 focus:border-"
                 placeholder="Enter Calories"
               />
 
@@ -221,14 +221,16 @@
               <input
                 type="text"
                 id="enter-workout"
-                class="outline-none border-[1px] border-solid border-grayBorder rounded-[5px] bg-transparent p-[10px] text-secondary font-[400] w-full"
+                name="workout"
+                class="outline-none border-[1px] border-solid border-grayBorder rounded-[5px] bg-transparent p-[10px] text-secondary font-[400] w-full focus:ring-2 focus:ring-secondary focus:ring-offset-1 focus:border-"
                 placeholder="Enter Workout"
               />
 
               <input
                 type="number"
                 id="enter-workout-calories"
-                class="outline-none border-[1px] border-solid border-grayBorder rounded-[5px] bg-transparent p-[10px] text-secondary font-[400] w-full"
+                name="calorie"
+                class="outline-none border-[1px] border-solid border-grayBorder rounded-[5px] bg-transparent p-[10px] text-secondary font-[400] w-full focus:ring-2 focus:ring-secondary focus:ring-offset-1 focus:border-"
                 placeholder="Enter Calories "
               />
 
@@ -272,7 +274,7 @@
   </section>
 
     <!-- set Daily Limit Modal -->
-    <section class="bg-modal fixed inset-0 pt-[2rem] modal hidden">
+    <section class="bg-modal fixed inset-0 pt-[2rem]  hidden" id="limit-modal">
       <!-- modal box -->
       <div class="bg-white rounded-xl py-3 mx-auto w-[90%] md:w-[40%]">
         <header
