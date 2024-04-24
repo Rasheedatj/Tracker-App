@@ -30,10 +30,10 @@ class Tracker {
 
   async getWorkouts() {
     try {
-      this.showSpinner('workout-loader');
+      // this.showSpinner('workout-loader');
       const res = await WorkoutApi.getWorkouts();
       this._workouts = res.data.data;
-      this.hideSpinner('workout-loader');
+      // this.hideSpinner('workout-loader');
       this._render();
       this._displayNewWorkout();
     } catch (error) {

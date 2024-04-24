@@ -1,6 +1,7 @@
 class User {
   constructor() {
     this.username();
+    this.registerBtn();
   }
 
   username() {
@@ -21,6 +22,12 @@ class User {
     const username = document.getElementById('enter-username').value;
     document.getElementById('username-modal').classList.add('hidden');
     localStorage.setItem('username', username);
+  }
+
+  registerBtn() {
+    localStorage.getItem('username')
+      ? document.getElementById('sign-up').classList.add('hidden')
+      : document.getElementById('sign-up').classList.remove('hidden');
   }
 }
 

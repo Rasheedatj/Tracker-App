@@ -19,7 +19,7 @@ class App {
       heroMeal.src = mealImg;
       const user = new User();
     } else if (this.pathName === '/tracker.html') {
-      document.getElementById('user').src = avatar;
+      // document.getElementById('user').src = avatar;
       const tracker = new Tracker();
       const main = new Main();
     }
