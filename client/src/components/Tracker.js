@@ -190,7 +190,7 @@ class Tracker {
         <div class="relative ">
         <i class="w-4 h-4 option-btn fa fa-ellipsis-v" aria-hidden="true"></i>
 
-        <span class="options absolute top-0 bg-white z-10 hidden ">
+        <span class="options absolute top-0 right-  bg-white z-10 hidden ">
           <p  class="px-4 py-2 cursor-pointer hover:bg-gray-200 delete" id="delete">Delete</p>
           <p  class="px-4 py-2 cursor-pointer hover:bg-gray-200 update" id="update">Update</p>
         </span>

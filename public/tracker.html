@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico" />
+    <title>Tracker | Dashboard</title>
+  <script defer src="bundle.js"></script><link href="main.css" rel="stylesheet"></head>
+  <body class=" bg-primary">
+    <!-- HEADER -->
+    <header
+      class="flex flex-col items-center gap-[1rem] md:gap-0 md:flex-row md:justify-between px-[2rem] py-[1rem]"
+    >
+      <a
+        href="./index.html"
+        class="text-[40px] leading-[50px] text-secondary font-semibold"
+      >
+        <i class="fa-solid fa-utensils"></i> Tracalorie
+      </a>
+
+      <div class="flex items-center gap-[20px]">
+        <button
+          class="border-[1px] border-solid border-secondary text-secondary   rounded-md  font-normal text-lg py-2 px-3  transition-all duration-100 ease-linear"
+          id="set-limit"
+        >
+          Set Daily Limit
+        </button>
+        <button
+          id="reset"
+          class="border-[1px] border-solid border-secondary text-secondary   rounded-md  font-normal text-lg py-2 px-3  transition-all duration-100 ease-linear"
+        >
+          Reset Day
+        </button>
+      </div>
+    </header>
+
+    <!-- main -->
+    <main class="pt-8 pb-[1rem] px-[2rem] ">
+      <header class="flex justify-between pb-6 ">
+        <div>
+          <h1 class="text-2xl text-secondary font-medium capitalize" id="username"></h1>
+          <p class="text-grayText">Hello, remember to stay healthy👋</p>
+        </div>
+
+        <!-- <div class="w-16 h-16 rounded-full grid place-items-center ">
+          <img id="user"   alt="user" >
+        </div> -->
+      </header>
+      <!-- STATs -->
+      <section class="grid grid-cols-1 md:grid-cols-6 gap-[1rem]">
+        <div
+          class="bg-secondary flex flex-col gap-[.6rem] text-center text-primary rounded-[5px] md:col-start-1 md:col-end-4 py-[2rem]  cursor-pointer "
+        >
+          <h1 class="font-[700] text-[32px] leading-[35px]" id="limit"></h1>
+          <p class="capitalize font-[400] text-[18px]">Daily Calorie limit</p>
+        </div>
+
+        <div
+          class="bg-accent1 flex flex-col gap-[.6rem] text-center text-primary border-solid  border-[1px] rounded-[5px] border-grayBorder md:col-start-4 md:col-end-7 py-[2rem]  cursor-pointer "
+        >
+          <h1
+            class="font-[700] text-[32px] leading-[35px]"
+            id="total-calories"
+          ></h1>
+          <p class="capitalize font-[400] text-[18px]">gain/Loss</p>
+        </div>
+
+        <div
+          class="bg-grayPrimary border-[1px] text-secondary border-solid rounded-[5px] border-grayBorder flex flex-col gap-[.6rem] text-center py-[2rem] md:col-start-1 md:col-end-3  cursor-pointer "
+        >
+          <h1
+            class="font-[700] text-[32px] leading-[35px]"
+            id="consumedCal"
+          ></h1>
+          <p class="capitalize font-[400] text-[18px]">Calories consumed</p>
+        </div>
+
+        <div
+          class="bg-grayPrimary border-[1px] text-secondary border-solid rounded-[5px] border-grayBorder flex flex-col gap-[.6rem] text-center py-[2rem] md:col-start-3 md:col-end-5  cursor-pointer "
+        >
+          <h1 class="font-[700] text-[32px] leading-[35px]" id="burnedCal"></h1>
+          <p class="capitalize font-[400] text-[18px]">Calories burned</p>
+        </div>
+
+        <div
+          class="bg-grayPrimary border-[1px] text-secondary border-solid rounded-[5px] border-grayBorder flex flex-col gap-[.6rem] text-center py-[2rem] md:col-start-5 md:col-end-7  cursor-pointer "
+          id="remaining-box"
+        >
+          <h1
+            class="font-[700] text-[32px] leading-[35px]"
+            id="remainingCal"
+          ></h1>
+          <p class="capitalize font-[400] text-[18px]">Calories remaining</p>
+        </div>
+      </section>
+
+      <!-- progress bar -->
+      <section class="my-[3rem]">
+        <div class="bg-white h-[1rem] w-full rounded-[20px] overflow-x-clip">
+          <div
+            class="h-full w-0 bg-accent1 transition-all duration-700 ease-linear  "
+            id="progress-bar"
+          ></div>
+        </div>
+      </section>
+
+      <!--filter  -->
+      <section class="flex flex-col md:flex-row md:items-center gap-[1rem]">
+        <div class="w-[100%] md:w-[50%]">
+          <input
+            type="text"
+            id="filter-meal"
+            class="outline-none border-[1px] border-solid border-grayBorder rounded-[5px] bg-transparent p-[10px] text-secondary font-[400] w-full focus:ring-2 focus:ring-secondary focus:ring-offset-1 focus:border-"
+            placeholder="Filter Meals..."
+          />
+        </div>
+
+        <div class="w-[100%] md:w-[50%]">
+          <input
+            type="text"
+            id="filter-workout"
+            class="outline-none border-[1px] border-solid border-grayBorder rounded-[5px] bg-transparent p-[10px] text-secondary font-[400] w-full focus:ring-2 focus:ring-secondary focus:ring-offset-1 focus:border-"
+            placeholder="Filter Workouts..."
+          />
+        </div>
+      </section>
+
+      <!--add meal / workout  -->
+      <section
+        class="flex flex-col gap-[3rem] md:flex-row md:gap-[1rem] pt-[3rem] pb-[2rem] parent"
+      >
+        <!-- meals -->
+        <div class="w-[100%] md:w-[50%]">
+          <!-- header -->
+          <div
+            class="border-l-[3px] border-accent1 border-solid p-[10px] mb-[1rem] flex items-center justify-between"
+          >
+            <h1
+              class="text-secondary capitalize font-[400] text-[24px] md:text-[32px] leading-[35px]"
+            >
+              meals
+            </h1>
+            <button
+              class="text-primary flex items-center px-[10px] py-[6px] gap-[5px] bg-accent1 rounded-[3px] capitalize font-[600] add-btn w-fit"
+              id="add-meal-btn"
+            >
+              <i class="fa fa-plus"></i>
+              <h4>add meal</h4>
+            </button>
+          </div>
+
+          <!-- add meals form -->
+          <section
+            id="meal-collapse"
+            class="hidden bg-grayPrimary border-[1px] border-solid border-grayBorder rounded-[5px] mb-[1rem] p-[10px] collapse-form"
+          >
+            <form
+              action=""
+              id="meal-form"
+              class="flex flex-col gap-[15px] form-btn"
+            >
+              <input
+                type="text"
+                id="enter-meal"
+                name="meal"
+                class="outline-none border-[1px] border-solid border-grayBorder rounded-[5px] bg-transparent p-[10px] text-secondary font-[400] w-full focus:ring-2 focus:ring-secondary focus:ring-offset-1 focus:border-"
+                placeholder="Enter Meal or Items"
+              />
+
+              <input
+                type="number"
+                name="calorie"
+                id="enter-meal-calories"
+                class="outline-none border-[1px] border-solid border-grayBorder rounded-[5px] bg-transparent p-[10px] text-secondary font-[400] w-full focus:ring-2 focus:ring-secondary focus:ring-offset-1 focus:border-"
+                placeholder="Enter Calories"
+              />
+
+              <button
+                class="text-primary self-start px-[10px] py-[6px] gap-[5px] bg-accent1 rounded-[5px] capitalize font-[600]"
+                type="submit"
+              >
+                add meal item
+              </button>
+            </form>
+          </section>
+
+          <section id="meal-items" class="flex flex-col gap-[10px] relative">
+            
+            <div class="custom-loader absolute left-1/2 right-1/2 top-1/2 hidden" id="meal-loader"></div>
+          </section>
+        </div>
+
+        <!-- Workout -->
+        <div class="w-[100%] md:w-[50%]">
+          <!-- header -->
+          <div
+            class="border-l-[3px] border-orange border-solid p-[10px] mb-[1rem] flex items-center justify-between"
+          >
+            <h1
+              class="text-secondary capitalize font-[400] text-[24px] md:text-[32px] leading-[35px]"
+            >
+              Workouts
+            </h1>
+            <button
+              class="text-white flex items-center px-[10px] py-[6px] gap-[5px] bg-orange rounded-[3px] capitalize font-[600] addd-btn"
+              id="add-workout-btn"
+            >
+              <i class="fa fa-plus"></i>
+              <h4>add workout</h4>
+            </button>
+          </div>
+
+          <!-- add workout form -->
+          <section
+            id="workout-collapse"
+            class="hidden bg-grayPrimary border-[1px] border-solid border-grayBorder rounded-[5px] mb-[1rem] p-[10px] collapse-form"
+          >
+            <form action="" id="workout-form" class="flex flex-col gap-[15px]">
+              <input
+                type="text"
+                id="enter-workout"
+                name="workout"
+                class="outline-none border-[1px] border-solid border-grayBorder rounded-[5px] bg-transparent p-[10px] text-secondary font-[400] w-full focus:ring-2 focus:ring-secondary focus:ring-offset-1 focus:border-"
+                placeholder="Enter Workout"
+              />
+
+              <input
+                type="number"
+                id="enter-workout-calories"
+                name="calorie"
+                class="outline-none border-[1px] border-solid border-grayBorder rounded-[5px] bg-transparent p-[10px] text-secondary font-[400] w-full focus:ring-2 focus:ring-secondary focus:ring-offset-1 focus:border-"
+                placeholder="Enter Calories "
+              />
+
+              <button
+                class="text-white self-start px-[10px] py-[6px] gap-[5px] bg-orange rounded-[5px] capitalize font-[600]"
+                type="submit"
+              >
+                add workout item
+              </button>
+            </form>
+          </section>
+
+          <section
+            id="workout-items"
+            class="flex flex-col gap-[10px] relative"
+          >
+          <div class="custom-loader absolute left-1/2 right-1/2 top-1/2 hidden " id="workout-loader"></div>
+        
+        </section>
+        </div>
+      </section>
+
+    
+    </main>
+
+    <!-- error message -->
+    <section class="bg-modal fixed inset-0 pt-8 hidden" id="delete-modal">
+    <div
+      class=" mx-auto w-9/12  bg-white p-8 rounded-2xl flex flex-col gap-6 "
+    >
+      <h1 class="text-3xl">Delete Item: <span id="delete-item" class="capitalize">pounded yam</span></h1>
+      <div class="border-y-2 border-gray-200 py-3">
+        <p class="text-lg">Are you sure you want to delete item: <span id="delete-item" >pounded yam</span>?</p>
+      </div>
+
+      <div class="self-end flex items-center gap-1 ">
+        <button type="submit" class="bg-slate-400 rounded-lg outline-none text-white border-white border-2 px-3 py-2 " id="cancel-action">Cancel</button>
+        <button type="submit" class="bg-red-600 rounded-lg outline-none text-white border-white border-2 px-3 py-2 " id="delete-action">Delete</button>
+      </div>
+    </div>
+  </section>
+
+    <!-- set Daily Limit Modal -->
+    <section class="bg-modal fixed inset-0 pt-[2rem]  hidden" id="limit-modal">
+      <!-- modal box -->
+      <div class="bg-white rounded-xl py-3 mx-auto w-[90%] md:w-[40%]">
+        <header
+          class="flex justify-between items-center p-[10px] border-b-[1px] border-solid border-grayBorder"
+        >
+          <h1 class="capitalize text-[20px] font-[400]">set daily limit</h1>
+
+          <div class="close-modal">
+            <i
+              class="fa fa-times text-grayBorder text-[24px] font-light cursor-pointer"
+            ></i>
+          </div>
+        </header>
+
+        <form class="p-[10px] set-limit">
+          <label for="calorie limit">Daily Calorie Limit</label>
+          <input
+            type="number"
+            id="enter-limit"
+            name="limit"
+            class="outline-none mt-[.5rem] border-[1px] border-solid border-grayBorder rounded-[5px] bg-transparent p-[10px] text-secondary font-[400] w-full"
+            placeholder="2000"
+          />
+          <button
+            class="text-white self-start px-[10px] py-[6px] gap-[5px] bg-secondary rounded-[5px] capitalize font-[600] mt-[1rem] save"
+            type="submit"
+          >
+            Save
+          </button>
+        </form>
+      </div>
+    </section>
+  </body>
+</html>

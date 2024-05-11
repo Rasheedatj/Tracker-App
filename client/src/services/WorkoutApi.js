@@ -2,7 +2,7 @@ import axios from 'axios';
 
 class WorkoutApi {
   constructor() {
-    this.URL = 'http://localhost:8000/api/workouts';
+    this.URL = '/api/workouts';
   }
 
   getWorkouts() {

@@ -2,7 +2,7 @@ import axios from 'axios';
 
 class MealApi {
   constructor() {
-    this.URL = 'http://localhost:8000/api/meals';
+    this.URL = '/api/meals';
   }
 
   getMeals() {
